@@ -1,4 +1,4 @@
-import { Input } from "../components/LoginInput";
+import { Input } from "../components/Input.tsx";
 
 interface LoginFormProps
 {
@@ -11,21 +11,21 @@ interface LoginFormProps
 
 export function LoginForm({name, setUserName, password, setPassword, onLogin} : LoginFormProps)
 {
+    const clasnNameString = `border border-slate-400 border-b-4 bg-slate-300
+    placeholder:text-slate-700 placeholder:italic outline-hidden focus:border-b-violet-600 focus:placeholder:opacity-[0.0] 
+    caret-black p-2 mb-5`;
+    
     return(
         <div className='bg-slate-200'>
         <div className='flex flex-col px-[50px] py-[50px]'>
             <Input
                 placeholder="Username" type="text" value={name} setValue={setUserName}
-                className="border border-slate-400 border-b-4 bg-slate-300 placeholder:text-slate-700 placeholder:italic
-                outline-hidden focus:border-b-violet-600 focus:placeholder:opacity-[0.0]
-                caret-black p-2 mb-5"
+                className={clasnNameString}
             />                    
 
             <Input
                 placeholder="Password" type="password" value={password} setValue={setPassword}
-                className="border border-slate-400 border-b-4 bg-slate-300 placeholder:text-slate-700 placeholder:italic
-                outline-hidden focus:border-b-violet-600 focus:placeholder:opacity-[0.0]
-                caret-black p-2 mb-5"
+                className={clasnNameString}
             />
 
             <button className='bg-emerald-700 hover:cursor-pointer p-2 hover:bg-orange-700
