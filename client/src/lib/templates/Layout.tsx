@@ -8,7 +8,9 @@ export default function Layout({ children } : { children: React.ReactNode })
             <div className='bg-slate-700 w-[75%] h-full text-slate-200 flex flex-col'>
                 <ToastContainer>                    
                 </ToastContainer>
-                {children}
+                <main>
+                    {children}
+                </main>
             </div>
         </main>
     );
