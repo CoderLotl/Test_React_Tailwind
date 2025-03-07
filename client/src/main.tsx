@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom/client";
 import { StrictMode } from 'react'
-import { BACK_PATH, BASE_PATH } from "./lib/config/config.tsx";
+import { BASE_PATH } from "./lib/config/config.tsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import './index.css';
 
@@ -19,7 +19,7 @@ ReactDOM.createRoot(root).render(
 				<Routes>
 					<Route index element={<Login />} />
 					<Route path={`${BASE_PATH}/home`} element={<Home />} />
-				</Routes>    		
+				</Routes>
 			</Layout>
 		</Router>
 	</StrictMode>,

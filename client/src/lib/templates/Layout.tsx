@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { ToastContainer } from 'react-toastify';
 
 export default function Layout({ children } : { children: React.ReactNode })
@@ -8,9 +8,7 @@ export default function Layout({ children } : { children: React.ReactNode })
             <div className='bg-slate-700 w-[75%] h-full text-slate-200 flex flex-col'>
                 <ToastContainer>                    
                 </ToastContainer>
-                <main>
-                    {children}
-                </main>
+                {children}
             </div>
         </main>
     );
