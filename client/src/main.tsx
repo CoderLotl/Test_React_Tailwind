@@ -8,6 +8,7 @@ import './index.css';
 import Layout  from './lib/templates/Layout.tsx';
 import Login from './lib/routes/Login.tsx';
 import Home from './lib/routes/Home.tsx';
+import SignUp from "./lib/routes/SignUp.tsx";
 
 let root = document.getElementById('root')!;
 root.classList.add('w-full', 'h-full', 'bg-slate-200');
@@ -19,6 +20,7 @@ ReactDOM.createRoot(root).render(
 				<Routes>
 					<Route index element={<Login />} />
 					<Route path={`${BASE_PATH}/home`} element={<Home />} />
+					<Route path={`${BASE_PATH}/signup`} element={<SignUp />}/>
 				</Routes>
 			</Layout>
 		</Router>

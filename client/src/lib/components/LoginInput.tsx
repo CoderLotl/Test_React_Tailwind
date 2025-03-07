@@ -1,4 +1,4 @@
-export interface LoginInputProps
+export interface InputProps
 {
     placeholder: string,
     type: string,
@@ -7,7 +7,7 @@ export interface LoginInputProps
     className: string
 }
 
-export function LoginInput({placeholder, type, value, setValue, className} : LoginInputProps )
+export function Input({placeholder, type, value, setValue, className} : InputProps )
 {
     return (
         <input placeholder={placeholder} type={type} className={className} value={value} onChange={(e)=>setValue(e.target.value)}>

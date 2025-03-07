@@ -5,7 +5,7 @@ import { BACK_PATH, BASE_PATH } from '../config/config.tsx';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export async function Login_fn(username: string, password: string)
+export async function LogIn(username: string, password: string)
 {    
     if( username == '' || password == '')
     {
@@ -49,6 +49,6 @@ export async function Login_fn(username: string, password: string)
     }
     catch(error)
     {
-        toast.error(`Error: ${error}`);
+        toast.error(`${error}`);
     }
 }
