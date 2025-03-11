@@ -110,14 +110,14 @@ export class DataAccessFetch
         {            
             if(error instanceof TypeError)
             {                    
-                throw new Error('network');
+                console.log('network');
             }        
             if (showError)
             {
                 console.error('Error posting data:', error);
             }
         
-            throw error;
+            return false;
         }
     }
 
@@ -141,14 +141,14 @@ export class DataAccessFetch
         {
             if(error instanceof TypeError)
             {                    
-                throw new Error('network');
+                console.log('network');
             }        
             if (showError)
             {
                 console.error('Error putting data:', error);
             }
         
-            throw error;
+            return false;
         }
     }
     
@@ -173,14 +173,14 @@ export class DataAccessFetch
         {
             if(error instanceof TypeError)
             {                    
-                throw new Error('network');
+                console.log('network');
             }        
-            if (showError)
+            if(showError)
             {
                 console.error('Error posting data:', error);
             }
         
-            throw error;
+            return false;
         }
     }
 }
