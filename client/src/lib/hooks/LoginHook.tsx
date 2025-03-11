@@ -19,7 +19,7 @@ export async function LogIn(email: string, password: string)
     }
 
     let dataAccess = new DataAccessFetch();
-    let payload = { user: email, password: password };
+    let payload = { email: email, password: password };
     try
     {
         let serverResponse = await dataAccess.postData(`${BACK_PATH}/auth/login`, payload, true, true);

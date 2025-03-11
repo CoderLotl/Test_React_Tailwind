@@ -1,6 +1,5 @@
 import ReactDOM from "react-dom/client";
 import { StrictMode } from 'react'
-import { BASE_PATH } from "./lib/config/config.tsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router";
 import './index.css';
 
