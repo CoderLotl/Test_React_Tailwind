@@ -1,20 +1,25 @@
 import { DataAccessFetch } from './services/DataAccessFetch.tsx';
-import { StorageManager } from './services/StorageManager.tsx';
 import { useNavigate } from "react-router";
-import { BACK_PATH, BASE_PATH } from '../config/config.tsx';
+import { BACK_PATH } from '../config/config.tsx';
+import { CheckMail } from './utilities/common.tsx';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export async function LogIn(username: string, password: string)
+export async function LogIn(email: string, password: string)
 {    
-    if( username == '' || password == '')
+    if( email == '' || password == '' )
     {
-        toast.warn('Error: Please enter both username and password.');
+        toast.warn('Error: Please enter both email and password.');
+        return false;
+    }
+    if(!CheckMail(email))
+    {
+        toast.warn('Error: Please check your entered email.');
         return false;
     }
 
     let dataAccess = new DataAccessFetch();
-    let payload = { user: username, password: password };
+    let payload = { user: email, password: password };
     try
     {
         let serverResponse = await dataAccess.postData(`${BACK_PATH}/auth/login`, payload, true, true);
@@ -31,14 +36,11 @@ export async function LogIn(username: string, password: string)
             let svResponse = JSON.parse(resp['response']);
 
             if(svResponse.hasOwnProperty('token'))
-            {
-                let storageManager = new StorageManager();
-                let navigate = useNavigate();
-
-                storageManager.WriteLS('user', username);
+            {                
+                let navigate = useNavigate();                
                 setTimeout(() =>
                 {                        
-                    navigate(`${BASE_PATH}/home`);
+                    navigate(`/home`);
                 }, 1000);
             }
         }

@@ -19,8 +19,8 @@ ReactDOM.createRoot(root).render(
 			<Layout>
 				<Routes>
 					<Route index element={<Login />} />
-					<Route path={`${BASE_PATH}/home`} element={<Home />} />
-					<Route path={`${BASE_PATH}/signup`} element={<SignUp />}/>
+					<Route path={`/home`} element={<Home />} />
+					<Route path={`/signup`} element={<SignUp />}/>
 				</Routes>
 			</Layout>
 		</Router>
