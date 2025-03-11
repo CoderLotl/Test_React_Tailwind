@@ -1,7 +1,7 @@
 export class DataAccessFetch
 {
     // GET
-    async getData(url: string, params: string | null = null, returnResponse: boolean = false, showError: boolean = true, includeCredentials: boolean = false)
+    async getData(url: string, params: string | null = null, returnResponse: boolean = false, showError: boolean = true, includeCredentials: boolean = false): Promise<boolean | Blob | Response>
     {
         let requestUrl = url;
   
@@ -9,8 +9,7 @@ export class DataAccessFetch
         {
             const queryString = new URLSearchParams(params).toString();
             if (queryString)
-            {
-                // If the URL already has a query string, append with '&'
+            {                
                 const separator = url.includes('?') ? '&' : '?';
                 requestUrl = `${url}${separator}${queryString}`;
             }
@@ -24,7 +23,12 @@ export class DataAccessFetch
                 {
                     'Content-Type': 'application/json'
                 }                
-            } as { method: string, headers: { 'Content-Type': string }, credentials?: string };;
+            } as { method: string, headers: { 'Content-Type': string }, credentials?: string };
+
+            if(includeCredentials)
+            {
+                fetchParams.credentials = 'include';
+            }            
 
             const response = await fetch(requestUrl,
             {
@@ -33,12 +37,7 @@ export class DataAccessFetch
                 {
                     'Content-Type': 'application/json'
                 }
-            });
-
-            if(includeCredentials)
-            {
-                fetchParams.credentials = 'include';
-            }
+            });            
 
             if(response.ok)
             {
@@ -53,7 +52,7 @@ export class DataAccessFetch
                     catch (error)
                     {
                         console.error('Error converting response to blob:', error);
-                        // Handle error (return error or display fallback)
+                        return false;
                     }
                 }
                 else
@@ -66,18 +65,18 @@ export class DataAccessFetch
                 return returnResponse ? response : false;
             }
         }
-        catch (error)
+        catch(error)
         {
             if(error instanceof TypeError)
             {                    
-                throw new Error('network');
+                console.log('Error: network.');
             }        
-            if (showError)
+            if(showError)
             {
                 console.error('Error posting data:', error);
             }
         
-            throw error;
+            return false;
         }
     }
     

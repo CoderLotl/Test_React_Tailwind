@@ -54,3 +54,10 @@ export async function LogIn(email: string, password: string)
         toast.error(`${error}`);
     }
 }
+
+export async function CheckIfLoggedIn()
+{
+    let dataAcces = new DataAccessFetch();
+    let serverResponse = await dataAcces.getData(`${BACK_PATH}/auth/validate`, null, false, true, true);    
+    return serverResponse;
+}
