@@ -16,28 +16,21 @@ export class DataAccessFetch
         }
 
         try {
-            let fetchParams =
+            let fetchParams: RequestInit  =
             {
                 method: 'GET',
                 headers:
                 {
                     'Content-Type': 'application/json'
                 }                
-            } as { method: string, headers: { 'Content-Type': string }, credentials?: string };
+            };
 
             if(includeCredentials)
             {
                 fetchParams.credentials = 'include';
             }            
 
-            const response = await fetch(requestUrl,
-            {
-                method: 'GET',
-                headers:
-                {
-                    'Content-Type': 'application/json'
-                }
-            });            
+            const response = await fetch(requestUrl, fetchParams);            
 
             if(response.ok)
             {
@@ -81,13 +74,12 @@ export class DataAccessFetch
     }
     
     // POST
-    async postData(url: string, payload: Object | null = null, returnResponse: boolean = false, showError: boolean = true)
+    async postData(url: string, payload: Object | null = null, returnResponse: boolean = false, showError: boolean = true, includeCredentials: boolean = false): Promise<boolean | Response>
     {
-        try{
-            let response;
+        try{            
             let payL = payload !== null ? JSON.stringify(payload) : '';
-    
-            response = await fetch(url,
+
+            let fetchParams: RequestInit  =
             {
                 method: 'POST',
                 headers:
@@ -95,7 +87,14 @@ export class DataAccessFetch
                     'Content-Type': 'application/json'
                 },
                 body: payL
-            });            
+            };
+
+            if(includeCredentials)
+            {
+                fetchParams.credentials = 'include';
+            } 
+    
+            const response = await fetch(url, fetchParams);
     
             if(response.ok)
             {
@@ -122,18 +121,25 @@ export class DataAccessFetch
     }
 
     // PUT
-    async putData(url: string, payload: Object, showError: boolean = false)
+    async putData(url: string, payload: Object, showError: boolean = false, includeCredentials: boolean): Promise<boolean | Response>
     {
         try {
-            const response = await fetch(url,
+            let fetchParams: RequestInit =
             {
                 method: 'PUT',
                 headers:
                 {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(payload)             
-            });            
+                body: JSON.stringify(payload)
+            }
+
+            if(includeCredentials)
+            {
+                fetchParams.credentials = 'include';
+            } 
+
+            const response = await fetch(url, fetchParams);
 
             return response.ok ? response : false;            
         }
@@ -153,19 +159,26 @@ export class DataAccessFetch
     }
     
     // DELETE
-    async deleteData(url: string, params: string | null = null, showError: boolean = false)
+    async deleteData(url: string, params: string | null = null, showError: boolean = false, includeCredentials: boolean): Promise<boolean | Response>
     {
         const queryString = new URLSearchParams(params || '').toString();
         const requestUrl = queryString  != '' ? `${url}?${queryString}` : url;
         try {
-            const response = await fetch(requestUrl,
+            let fetchParams: RequestInit =
             {
                 method: 'DELETE',
                 headers:
                 {
                     'Content-Type': 'application/json'
-                }               
-            });            
+                }
+            };
+
+            if(includeCredentials)
+            {
+                fetchParams.credentials = 'include';
+            }
+
+            const response = await fetch(requestUrl, fetchParams);
 
             return response.ok ? response : false;
         }
