@@ -37,7 +37,8 @@ export class DataAccessFetch
                 const contentType = response.headers.get('Content-Type');
                 if(contentType!.startsWith('image/'))
                 {
-                    try {
+                    try
+                    {
                         const blob = await response.blob();
                         
                         return blob;
