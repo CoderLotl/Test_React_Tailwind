@@ -1,6 +1,6 @@
 import { DataAccessFetch } from './services/DataAccessFetch.tsx';
 import { useNavigate } from "react-router";
-import { BACK_PATH } from '../config/config.tsx';
+import { BACK_PATH, isDev } from '../config/config.tsx';
 import { CheckMail } from './utilities/common.tsx';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -57,6 +57,10 @@ export async function LogIn(email: string, password: string)
 
 export async function CheckIfLoggedIn()
 {
+    if(isDev)
+    {
+        return false;
+    }
     let dataAcces = new DataAccessFetch();
     let serverResponse = await dataAcces.getData(`${BACK_PATH}/auth/validate`, null, false, true, true);    
     return serverResponse;

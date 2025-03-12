@@ -1,10 +1,13 @@
-import React from 'react';
+import Title from "../components/Title";
 
 export default function Home()
 {
-    return (
-        <div>
-            <h1 className="text-3xl font-bold">Test2</h1>
-        </div>
+    return(
+        <>
+            <Title title="Home"/>
+            <div>
+                <h1 className="text-3xl font-bold">Test2</h1>
+            </div>
+        </>
     );
 }
